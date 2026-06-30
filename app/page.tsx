@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { getLegacyPage } from "@/lib/legacy";
 import { LegacyPage } from "@/components/LegacyPage";
 import { JsonLd } from "@/components/json-ld";
@@ -9,12 +9,12 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "TheRain | Ride-Hailing, Delivery & School Transport in Cameroon",
   description:
-    "TheRain is Cameroon's leading transport platform for ride-hailing, delivery, school transport, and fleet management. Book safer rides, schedule deliveries, manage transport in Cameroon.",
+    "TheRain is Cameroon’s leading transport platform for ride-hailing, delivery, school transport, and fleet management. Book safer rides, schedule deliveries, manage transport in Cameroon.",
   alternates: { canonical: "https://therain.tech/" },
   openGraph: {
     title: "TheRain | Ride-Hailing, Delivery & School Transport in Cameroon",
     description:
-      "TheRain is Cameroon's leading transport platform for ride-hailing, delivery, school transport, and fleet management.",
+      "TheRain is Cameroon’s leading transport platform for ride-hailing, delivery, school transport, and fleet management.",
     url: "https://therain.tech/",
     images: [{ url: "https://therain.tech/images/bg.jpg", width: 1200, height: 630, alt: "TheRain transport platform in Cameroon" }]
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TheRain | Ride-Hailing, Delivery & School Transport in Cameroon",
     description:
-      "TheRain is Cameroon's leading transport platform for ride-hailing, delivery, school transport, and fleet management.",
+      "TheRain is Cameroon’s leading transport platform for ride-hailing, delivery, school transport, and fleet management.",
     images: ["https://therain.tech/images/bg.jpg"]
   }
 };

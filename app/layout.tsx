@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,10 +9,18 @@ export const metadata: Metadata = {
     template: "%s"
   },
   description:
-    "TheRain is Cameroon's leading transport technology platform for ride-hailing, delivery, school transport, fleet services, and safer mobility.",
+    "TheRain is Cameroon’s leading transport platform for ride-hailing, delivery, school transport, fleet services, and safer mobility.",
   icons: {
-    icon: "/images/favicon.png",
-    apple: "/images/favicon.png"
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/favicon.png", sizes: "64x64", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" }
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "300x300", type: "image/png" }
+    ]
   },
   openGraph: {
     siteName: "TheRain",

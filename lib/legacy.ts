@@ -84,5 +84,13 @@ export function getLegacyPage(sourceFile: string): LegacyPageData {
   // Rewrite asset paths and anchor hrefs
   const rewritten = rewriteAnchors(rewriteAssetPaths(noScripts));
 
-  return { css, bodyHtml: rewritten, inlineScripts };
+  // Fix: .aos elements start with opacity:0 in CSS, waiting for IntersectionObserver
+  // which only runs after client-side JS hydration. This causes blank sections on load.
+  // Remove the hide-by-default so content is always visible; keep the transition
+  // so if JS does fire the class change it still animates smoothly.
+  const fixedCss = css
+    .replace(/\.aos\{opacity:0;/g, ".aos{opacity:1;")
+    .replace(/\.aos \{ opacity: 0;/g, ".aos { opacity: 1;");
+
+  return { css: fixedCss, bodyHtml: rewritten, inlineScripts };
 }
