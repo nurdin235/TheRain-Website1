@@ -41,15 +41,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" data-theme="dark" data-lang="en" suppressHydrationWarning>
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
+        {/* Preconnect so browser opens the connection before CSS requests arrive */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="" />
+        {/* Preload the hero LCP image – first hero slide on the homepage */}
+        <link rel="preload" href="/images/car1.webp" as="image" type="image/webp" />
+        {/* Load Google Fonts + Font Awesome asynchronously – never blocks FCP */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){function addCSS(href,opts){var l=document.createElement('link');l.rel='stylesheet';Object.assign(l,opts||{});l.href=href;document.head.appendChild(l);}addCSS('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');addCSS('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',{crossOrigin:'anonymous',referrerPolicy:'no-referrer'});})();`
+          }}
         />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

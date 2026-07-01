@@ -55,6 +55,39 @@ function rewriteScriptPaths(script: string): string {
   return script.replace(/"images\//g, '"/images/');
 }
 
+function rewriteImages(html: string): string {
+  let lcpMarked = false;
+  return html.replace(
+    /<img([^>]*?)\bsrc="(\/images\/[^"]+\.(jpg|jpeg|png))"([^>]*?)(\/?>\s*)/gi,
+    (_match, before, src, _ext, after, closing) => {
+      const srcLow = src.toLowerCase();
+      // Keep logo/favicon images simple – they are in the navbar and must load immediately
+      if (srcLow.includes("logo") || srcLow.includes("favicon") || srcLow.includes("appstore")) {
+        return `<img${before}src="${src}"${after}${closing}`;
+      }
+      const webp = src.replace(/\.(jpg|jpeg|png)$/i, ".webp");
+      const alreadyHasLoading = before.includes("loading=") || after.includes("loading=");
+      let extra = "";
+      if (!lcpMarked) {
+        // First content image is the LCP hero — eager load with high priority
+        extra = ' fetchpriority="high"';
+        lcpMarked = true;
+      } else if (!alreadyHasLoading) {
+        extra = ' loading="lazy"';
+      }
+      return `<picture><source srcset="${webp}" type="image/webp"><img${before}src="${src}"${after}${extra}${closing}</picture>`;
+    }
+  );
+}
+
+function rewriteIframes(html: string): string {
+  // Add loading="lazy" to Google Maps iframes that are missing it
+  return html.replace(/<iframe([^>]*?)(\/?>\s*)/gi, (_m, attrs, closing) => {
+    if (attrs.includes("loading=")) return `<iframe${attrs}${closing}`;
+    return `<iframe${attrs} loading="lazy"${closing}`;
+  });
+}
+
 export type LegacyPageData = {
   css: string;
   bodyHtml: string;
@@ -81,8 +114,8 @@ export function getLegacyPage(sourceFile: string): LegacyPageData {
   // Strip all script tags from body HTML
   const noScripts = rawBody.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "");
 
-  // Rewrite asset paths and anchor hrefs
-  const rewritten = rewriteAnchors(rewriteAssetPaths(noScripts));
+  // Rewrite asset paths, anchor hrefs, add WebP picture tags and lazy loading
+  const rewritten = rewriteImages(rewriteIframes(rewriteAnchors(rewriteAssetPaths(noScripts))));
 
   // Fix: .aos elements start with opacity:0 in CSS, waiting for IntersectionObserver
   // which only runs after client-side JS hydration. This causes blank sections on load.

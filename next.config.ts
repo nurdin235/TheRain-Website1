@@ -29,6 +29,20 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" }
         ]
+      },
+      {
+        // Immutable 1-year cache for static image assets
+        source: "/images/:file*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
+        // Cache favicons and icons for 1 year
+        source: "/:icon(favicon.ico|favicon.png|apple-touch-icon.png|icon-192.png|icon-512.png)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+        ]
       }
     ];
   }
