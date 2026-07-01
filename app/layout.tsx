@@ -13,17 +13,17 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/images/favicon.png", sizes: "64x64", type: "image/png" },
+      { url: "/favicon.png", type: "image/png" },
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/icon-512.png", sizes: "512x512", type: "image/png" }
     ],
     shortcut: "/favicon.ico",
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "300x300", type: "image/png" }
-    ]
+    apple: "/apple-touch-icon.png"
   },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     siteName: "TheRain",
+    url: "https://therain.tech",
     images: [{ url: "/images/bg.jpg", width: 1200, height: 630 }]
   }
 };

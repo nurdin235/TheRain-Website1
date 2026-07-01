@@ -7,20 +7,22 @@ import { organizationSchema, websiteSchema, servicesSchema, faqSchema } from "@/
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "TheRain | Ride-Hailing, Delivery & School Transport in Cameroon",
+  title: "TheRain | Ride-Hailing, Delivery & Comfort in Cameroon",
   description:
-    "TheRain is Cameroon’s leading transport platform for ride-hailing, delivery, school transport, and fleet management. Book safer rides, schedule deliveries, manage transport in Cameroon.",
+    "TheRain is Cameroon’s leading transport platform for ride-hailing, delivery, school transport, fleet management, and safer mobility across Cameroon.",
   alternates: { canonical: "https://therain.tech/" },
   openGraph: {
-    title: "TheRain | Ride-Hailing, Delivery & School Transport in Cameroon",
+    title: "TheRain | Ride-Hailing, Delivery & Comfort in Cameroon",
     description:
       "TheRain is Cameroon’s leading transport platform for ride-hailing, delivery, school transport, and fleet management.",
     url: "https://therain.tech/",
+    siteName: "TheRain",
+    type: "website",
     images: [{ url: "https://therain.tech/images/bg.jpg", width: 1200, height: 630, alt: "TheRain transport platform in Cameroon" }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "TheRain | Ride-Hailing, Delivery & School Transport in Cameroon",
+    title: "TheRain | Ride-Hailing, Delivery & Comfort in Cameroon",
     description:
       "TheRain is Cameroon’s leading transport platform for ride-hailing, delivery, school transport, and fleet management.",
     images: ["https://therain.tech/images/bg.jpg"]

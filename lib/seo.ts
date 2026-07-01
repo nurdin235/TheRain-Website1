@@ -102,9 +102,15 @@ export function websiteSchema(locale: Locale) {
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     name: BRAND_NAME,
-    url: SITE_URL,
+    alternateName: ["TheRain Cameroon", "therain.tech"],
+    url: `${SITE_URL}/`,
     inLanguage: locale === "fr" ? "fr-CM" : "en-CM",
-    publisher: { "@id": `${SITE_URL}/#organization` }
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/blog?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
   };
 }
 
